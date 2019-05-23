@@ -51,6 +51,22 @@ server.get('/', async (req, res) => {
           console.log(err);
       }
   })
+  
+
+  // Delete - Delete an account
+
+  server.delete('/:id', validateAccountId, async(req, res) => {
+      try {
+          const count = await Accounts.remove(req.params.id);
+          if(count > 0) {
+              res.status(200).json({ message:'Account has been deleted!' })
+          } else {
+              res.status(404).json({ error: 'Account not found' })
+          }
+      } catch(err) {
+          console.log(err);
+      }
+  } )
 
 
 
